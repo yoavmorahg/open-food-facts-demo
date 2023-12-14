@@ -1,5 +1,6 @@
 package com.techelevator.service;
 
+import com.techelevator.model.Product;
 import com.techelevator.model.ProductSearchResponse;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
@@ -18,9 +19,16 @@ public class ProductFinderService {
     }
 
     public ProductSearchResponse getSearchResults(String searchTerm) {
-        String query = String.format("https://world.openfoodfacts.net/cgi/search.pl?search_terms=%s&search_simple=1&action=process&json=1&fields=product_name,nutriments,serving_size",
+        String query = String.format("https://world.openfoodfacts.net/cgi/search.pl?search_terms=%s&search_simple=1&action=process&json=1&countries_tags_en=united-states&fields=product_name,nutriments,serving_size",
                 searchTerm);
         ProductSearchResponse result = restTemplate.getForObject(query, ProductSearchResponse.class);
+        if (result != null && result.getProducts() != null) {
+            for (Product product : result.getProducts()) {
+                if (product.getNutriments() != null) {
+                    product.getNutriments().setCalories(product.getNutriments().getEnergyKcal());
+                }
+            }
+        }
         return result;
     }
 }

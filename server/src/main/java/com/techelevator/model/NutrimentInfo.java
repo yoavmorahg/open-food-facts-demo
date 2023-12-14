@@ -5,6 +5,8 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 public class NutrimentInfo {
 
     @JsonProperty("energy-kcal")
+    private double energyKcal;
+
     private double calories;
 
     private double carbohydrates;
@@ -19,6 +21,14 @@ public class NutrimentInfo {
     private double sodium;
 
     private double sugars;
+
+    public double getEnergyKcal() {
+        return energyKcal;
+    }
+
+    public void setEnergyKcal(double energyKcal) {
+        this.energyKcal = energyKcal;
+    }
 
     public double getCalories() {
         return calories;
