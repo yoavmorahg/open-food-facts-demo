@@ -16,7 +16,14 @@ export default {
     computed: {
         results() {
             return this.$store.state.searchResults.length != 0 ?this.$store.state.searchResults.products : [];
+        },
+        resultData() {
+            return this.$store.state.searchResults ? this.$store.state.searchResults : {} ;
+        },
+        curPage() {
+            return this.$store.state.curPage;
         }
+
     },
     methods: {
         updateCurrentProduct(product) {
@@ -45,6 +52,10 @@ export default {
  .results-item:hover {
     cursor: pointer;
     color: blue;
+ }
+
+ .result-count {
+    margin-bottom: 10px;
  }
 
 

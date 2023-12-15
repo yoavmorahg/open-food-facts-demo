@@ -23,7 +23,7 @@ public class ProductInfoController {
 //    }
 
     @GetMapping("/search")
-    public ProductSearchResponse searchV2(@RequestParam String searchTerm) {
-        return productFinderService.getSearchResults(searchTerm);
+    public ProductSearchResponse searchV2(@RequestParam String searchTerm, @RequestParam(defaultValue="1") int pageNum) {
+        return productFinderService.getSearchResults(searchTerm, pageNum);
     }
 }

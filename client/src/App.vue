@@ -2,7 +2,9 @@
   <div id="app">
       <search-box />
       <image-spinner class="spinner" v-show="searching" />
-      <search-results v-show="!searching && !detailSelected"/>
+      <results-count />
+      <pager v-show="!searching && !detailSelected && curPage > 0" />
+      <search-results v-show="!searching && !detailSelected" />
       <product-detail class="detail-section" v-show="detailSelected"/>
   </div>
 </template>
@@ -13,13 +15,18 @@ import ProductDetail from './components/ProductDetail.vue'
 import SearchBox from './components/SearchBox.vue'
 import SearchResults from './components/SearchResults.vue'
 
+import Pager from './components/Pager.vue'
+import ResultsCount from './components/ResultsCount.vue'
+
 export default {
   name: 'App',
   components: {
     SearchBox,
     SearchResults,
     ProductDetail,
-    ImageSpinner
+    ImageSpinner,
+    Pager,
+    ResultsCount
   },
   computed: {
     detailSelected() {
@@ -27,6 +34,9 @@ export default {
     },
     searching() {
       return this.$store.state.searching;
+    },
+    curPage() {
+      return this.$store.state.curPage;
     }
   }
 }

@@ -6,6 +6,8 @@ import java.util.List;
 
 public class ProductSearchResponse {
 
+    private int count;
+
     private String page;
 
     @JsonProperty("page_count")
@@ -15,6 +17,14 @@ public class ProductSearchResponse {
     private int pageSize;
 
     private List<Product> products;
+
+    public int getCount() {
+        return count;
+    }
+
+    public void setCount(int count) {
+        this.count = count;
+    }
 
     public String getPage() {
         return page;

@@ -18,9 +18,10 @@ public class ProductFinderService {
         return result;
     }
 
-    public ProductSearchResponse getSearchResults(String searchTerm) {
-        String query = String.format("https://world.openfoodfacts.net/cgi/search.pl?search_terms=%s&search_simple=1&action=process&json=1&countries_tags_en=united-states&fields=product_name,nutriments,serving_size",
-                searchTerm);
+    public ProductSearchResponse getSearchResults(String searchTerm, int pageNum) {
+        String query = String.format("https://world.openfoodfacts.net/cgi/search.pl?search_terms=%s&search_simple=1&action=process&json=1&countries_tags_en=united-states&fields=product_name,nutriments,serving_size"
+                    + "&sort_by=popularity_key&states_tags=product_name_completed,nutrition-facts-completed&page=%d",
+                searchTerm, pageNum);
         ProductSearchResponse result = restTemplate.getForObject(query, ProductSearchResponse.class);
         if (result != null && result.getProducts() != null) {
             for (Product product : result.getProducts()) {
