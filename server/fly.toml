@@ -1,9 +1,9 @@
-# fly.toml app configuration file generated for open-food-facts-demo-misty-firefly-3326 on 2023-12-14T21:25:46-05:00
+# fly.toml app configuration file generated for open-food-facts-demo on 2023-12-15T11:12:03-05:00
 #
 # See https://fly.io/docs/reference/configuration/ for information about how to use this file.
 #
 
-app = "open-food-facts-demo-misty-firefly-3326"
+app = "open-food-facts-demo"
 primary_region = "bos"
 kill_signal = "SIGINT"
 kill_timeout = "5s"

@@ -2,7 +2,7 @@
   <div id="app">
       <search-box />
       <image-spinner class="spinner" v-show="searching" />
-      <results-count />
+      <results-count v-show="!searching && !detailSelected" />
       <pager v-show="!searching && !detailSelected && curPage > 0" />
       <search-results v-show="!searching && !detailSelected" />
       <product-detail class="detail-section" v-show="detailSelected"/>

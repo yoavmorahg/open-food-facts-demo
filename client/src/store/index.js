@@ -36,8 +36,8 @@ export default new Vuex.Store({
         commit('UPDATE_PAGE_NUM', 0);
         commit('UPDATE_DETAIL', {});
         commit('UPDATE_SEARCH_STATE', true);
-        // const server = 'https://open-food-facts-demo-misty-firefly-3326.fly.dev'
-        const server = 'http://localhost:8080';
+        const server = 'https://open-food-facts-demo.fly.dev';
+        // const server = 'http://localhost:8080';
         const url = `${server}/search?searchTerm=${state.searchTerm}`;
         axios.get(url).then( resp => {
           commit('UPDATE_SEARCH_RESULTS', resp.data);
@@ -61,8 +61,7 @@ export default new Vuex.Store({
       commit('UPDATE_SEARCH_RESULTS', []);
         commit('UPDATE_DETAIL', {});
         commit('UPDATE_SEARCH_STATE', true);
-        // const server = 'https://open-food-facts-demo-misty-firefly-3326.fly.dev'
-        const server = 'http://localhost:8080';
+        const server = 'https://open-food-facts-demo.fly.dev'
         const url = `${server}/search?searchTerm=${state.searchTerm}&pageNum=${state.curPage}`;
         axios.get(url).then( resp => {
           commit('UPDATE_SEARCH_RESULTS', resp.data);
