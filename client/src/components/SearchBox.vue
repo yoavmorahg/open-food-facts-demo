@@ -3,9 +3,9 @@
         <div class="search-container">
             <form>
                 <label for="search-term">Type a food to search for: </label>
-                <input id="search-term" type="text" v-model="searchTermText" />
-                <input class="btn" type="submit" @click.prevent="doSearch" :disabled="searching">
-                <button class="btn"  @click="clear" :disabled="searching">Clear</button>
+                <input  id="search-term" type="text" v-model="searchTermText" @keyup.enter="doSearch" :disabled="disabledInput"/>
+                <input class="btn" type="submit" @click.prevent="doSearch" :disabled="disabledInput">
+                <button class="btn"  @click="clear" :disabled="disabledInput">Clear</button>
             </form>
         </div>
   </div>
@@ -22,6 +22,9 @@ export default {
     computed: {
         searching() {
             return this.$store.state.searching;
+        },
+        disabledInput() {
+            return this.searching || this.$store.state.productDetail.product_name != undefined;
         }
     },
     methods: {
@@ -44,5 +47,7 @@ export default {
 .btn {
     margin-left: 3px;
 }
+
+
 
 </style>
