@@ -1,12 +1,14 @@
 <template>
   <div id="app">
       <search-box />
-      <search-results v-show="!detailSelected"/>
-      <product-detail v-show="detailSelected"/>
+      <image-spinner class="spinner" v-show="searching" />
+      <search-results v-show="!searching && !detailSelected"/>
+      <product-detail class="detail-section" v-show="detailSelected"/>
   </div>
 </template>
 
 <script>
+import ImageSpinner from './components/ImageSpinner.vue'
 import ProductDetail from './components/ProductDetail.vue'
 import SearchBox from './components/SearchBox.vue'
 import SearchResults from './components/SearchResults.vue'
@@ -16,12 +18,16 @@ export default {
   components: {
     SearchBox,
     SearchResults,
-    ProductDetail
+    ProductDetail,
+    ImageSpinner
   },
   computed: {
     detailSelected() {
       return this.$store.state.productDetail.product_name != undefined;
-    } 
+    },
+    searching() {
+      return this.$store.state.searching;
+    }
   }
 }
 </script>
@@ -34,6 +40,14 @@ export default {
   text-align: center;
   color: #2c3e50;
   margin-top: 60px;
+}
+
+.spinner {
+  margin-top: 10px;
+}
+
+.detail-section {
+  margin-top: 10px;
 }
 
 .hidden {

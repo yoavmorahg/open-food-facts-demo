@@ -17,12 +17,12 @@ public class ProductInfoController {
         this.productFinderService = productFinderService;
     }
 
-    @GetMapping("/search")
-    public String searchString(@RequestParam String searchTerm) {
-        return productFinderService.getSearchResultString(searchTerm);
-    }
+//    @GetMapping("/search")
+//    public String searchString(@RequestParam String searchTerm) {
+//        return productFinderService.getSearchResultString(searchTerm);
+//    }
 
-    @GetMapping("/search/v2")
+    @GetMapping("/search")
     public ProductSearchResponse searchV2(@RequestParam String searchTerm) {
         return productFinderService.getSearchResults(searchTerm);
     }
