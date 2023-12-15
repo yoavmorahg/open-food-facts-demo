@@ -2,7 +2,7 @@
   <div>
         <div class="search-container">
             <form>
-                <label for="search-term">Type something to search for: </label>
+                <label for="search-term">Type a food to search for: </label>
                 <input id="search-term" type="text" v-model="searchTermText" />
                 <input class="btn" type="submit" @click.prevent="doSearch" :disabled="searching">
                 <button class="btn"  @click="clear" :disabled="searching">Clear</button>
