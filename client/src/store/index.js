@@ -31,19 +31,31 @@ export default new Vuex.Store({
     },
   },
   actions: {
-    SEARCH_ACTION({commit, state}) {
-        commit('UPDATE_SEARCH_RESULTS', []);
-        commit('UPDATE_PAGE_NUM', 0);
-        commit('UPDATE_DETAIL', {});
-        commit('UPDATE_SEARCH_STATE', true);
-        const server = 'https://open-food-facts-demo.fly.dev';
-        // const server = 'http://localhost:8080';
-        const url = `${server}/search?searchTerm=${state.searchTerm}`;
-        axios.get(url).then( resp => {
-          commit('UPDATE_SEARCH_RESULTS', resp.data);
-          commit('UPDATE_PAGE_NUM', 1);
-          commit('UPDATE_SEARCH_STATE', false);
-        });
+    NEW_SEARCH_ACTION({ commit, state }) {
+      commit('UPDATE_DETAIL', {});
+      commit('UPDATE_SEARCH_STATE', true);
+      const server = 'http://localhost:8080';
+      const url = `${server}/search?searchTerm=${state.searchTerm}`;
+      axios.get(url).then(resp => {
+        if (resp.data && resp.data.items && resp.data.items.length > 0) {
+          commit('UPDATE_DETAIL', resp.data.items[0]);
+        }
+        commit('UPDATE_SEARCH_STATE', false);
+      });
+    },
+    SEARCH_ACTION({ commit, state }) {
+      commit('UPDATE_SEARCH_RESULTS', []);
+      commit('UPDATE_PAGE_NUM', 0);
+      commit('UPDATE_DETAIL', {});
+      commit('UPDATE_SEARCH_STATE', true);
+      const server = 'https://open-food-facts-demo.fly.dev';
+      // const server = 'http://localhost:8080';
+      const url = `${server}/search?searchTerm=${state.searchTerm}`;
+      axios.get(url).then(resp => {
+        commit('UPDATE_SEARCH_RESULTS', resp.data);
+        commit('UPDATE_PAGE_NUM', 1);
+        commit('UPDATE_SEARCH_STATE', false);
+      });
     },
     NEXT_PAGE_ACTION({ state, dispatch }) {
       if (state.curPage < state.searchResults.page_count) {
@@ -59,14 +71,14 @@ export default new Vuex.Store({
     },
     GET_PAGE_ACTION({ commit, state }) {
       commit('UPDATE_SEARCH_RESULTS', []);
-        commit('UPDATE_DETAIL', {});
-        commit('UPDATE_SEARCH_STATE', true);
-        const server = 'https://open-food-facts-demo.fly.dev'
-        const url = `${server}/search?searchTerm=${state.searchTerm}&pageNum=${state.curPage}`;
-        axios.get(url).then( resp => {
-          commit('UPDATE_SEARCH_RESULTS', resp.data);
-          commit('UPDATE_SEARCH_STATE', false);
-        });
+      commit('UPDATE_DETAIL', {});
+      commit('UPDATE_SEARCH_STATE', true);
+      const server = 'https://open-food-facts-demo.fly.dev'
+      const url = `${server}/search?searchTerm=${state.searchTerm}&pageNum=${state.curPage}`;
+      axios.get(url).then(resp => {
+        commit('UPDATE_SEARCH_RESULTS', resp.data);
+        commit('UPDATE_SEARCH_STATE', false);
+      });
     }
   },
   modules: {

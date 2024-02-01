@@ -4,30 +4,33 @@
       <image-spinner class="spinner" v-show="searching" />
       <results-count v-show="!searching && !detailSelected" />
       <pager v-show="!searching && !detailSelected && curPage > 0" />
-      <search-results v-show="!searching && !detailSelected" />
-      <product-detail class="detail-section" v-show="detailSelected"/>
+      <!-- <search-results v-show="!searching && !detailSelected" /> -->
+      <!-- <product-detail class="detail-section" v-show="detailSelected"/> -->
+      <ninja-product-detail v-show="$store.state.productDetail.name"/>
   </div>
 </template>
 
 <script>
 import ImageSpinner from './components/ImageSpinner.vue'
-import ProductDetail from './components/ProductDetail.vue'
+// import ProductDetail from './components/ProductDetail.vue'
 import SearchBox from './components/SearchBox.vue'
-import SearchResults from './components/SearchResults.vue'
+// import SearchResults from './components/SearchResults.vue'
 
 import Pager from './components/Pager.vue'
 import ResultsCount from './components/ResultsCount.vue'
+import NinjaProductDetail from './components/NinjaProductDetail.vue'
 
 export default {
   name: 'App',
   components: {
     SearchBox,
-    SearchResults,
-    ProductDetail,
+    // SearchResults,
+    // ProductDetail,
     ImageSpinner,
     Pager,
-    ResultsCount
-  },
+    ResultsCount,
+    NinjaProductDetail
+},
   computed: {
     detailSelected() {
       return this.$store.state.productDetail.product_name != undefined;

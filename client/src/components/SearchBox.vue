@@ -30,7 +30,7 @@ export default {
     methods: {
         doSearch() {
             this.$store.commit('UPDATE_SEARCH_TERM', this.searchTermText);
-            this.$store.dispatch('SEARCH_ACTION');
+            this.$store.dispatch('NEW_SEARCH_ACTION');
         },
         clear() {
             this.$store.commit('UPDATE_SEARCH_TERM', this.searchTermText);
